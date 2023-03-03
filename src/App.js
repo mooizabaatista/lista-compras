@@ -18,12 +18,23 @@ function App() {
   const [valor, setValor] = useState(0.0);
 
   useEffect(() => {
+    const listaComprasStorage = localStorage.getItem("@lista")
+    if (listaComprasStorage)
+      setListaCompras(JSON.parse(listaComprasStorage))
+  }, [])
+
+  useEffect(() => {
     let valorTotal = 0
     listaCompras.map((item) => {
       console.log(item);
       valorTotal += item.qtd * item.valor;
     });
     setTotal(valorTotal);
+
+    if (listaCompras.length > 0)
+      localStorage.setItem("@lista", JSON.stringify(listaCompras))
+    else
+      localStorage.removeItem("@lista");
   }, [listaCompras])
 
 
@@ -57,11 +68,15 @@ function App() {
     setListaCompras(novaLista);
   }
 
+  const generateId = () => {
+    return '_' + Math.random().toString(16).substr(2, 8);
+  };
 
   // Submit
   const handleSubmit = (e) => {
     e.preventDefault();
     const novoItem = {
+      id: generateId(),
       nome: nome,
       qtd: qtd,
       valor: valor
@@ -72,6 +87,8 @@ function App() {
 
     document.querySelector("#nome").value = '';
     document.querySelector("#qtd").value = '';
+
+    document.querySelector("#nome").focus();
   }
 
   return (
@@ -93,12 +110,12 @@ function App() {
                   {
                     listaCompras.map((item, key) => {
                       return (
-                        <p key={key} className="item-lista">
+                        <p key={item.id} className="item-lista">
 
                           <span className="fs-5 nome-item">{item.nome}</span>
                           <i className="fal fa-minus ms-3 bg-primary p-1 rounded text-light" onClick={(e) => handleDiminuiQtd(key)}></i> <span class="badge bg-secondary">{item.qtd < 10 ? `0${item.qtd}` : item.qtd}</span> <i className="fal fa-plus me-3 bg-primary p-1 rounded text-light" onClick={(e) => { handleAumentaQtd(key) }}></i>
                           <span className="fs-5">
-                            <input type="text" className="form-control text-center valor" placeholder="Valor" onChange={(e) => { setValor(e.target.value) }} onBlur={(e) => { handleEditaValor(key, e.target.value) }} />
+                            <input value={valor || item.valor} type="text" className="form-control text-center valor" placeholder="Valor" onChange={(e) => { setValor(e.target.value) }} onBlur={(e) => { handleEditaValor(key, e.target.value) }} />
                           </span>
                           <hr />
                         </p>
@@ -123,7 +140,7 @@ function App() {
                       <input type="number" className="form-control" id="qtd" onChange={(e) => { setQtd(e.target.value) }} autoComplete="off" />
                     </div>
                     <div className="mb-3">
-                      <input type="hidden" className="form-control" id="valor" onChange={(e) => { setValor(e.target.value) }} />
+                      <input type="hidden" className="form-control" id="valor" value={valor} onChange={(e) => { setValor(e.target.value) }} />
                     </div>
                     <button type="submit" className="btn btn-primary">Adicionar</button>
                   </form>
