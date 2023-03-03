@@ -63,7 +63,7 @@ function App() {
     setListaCompras(novaLista);
 
     document.querySelector("#nome").value = '';
-    document.querySelector("#qtd").value = 0;
+    document.querySelector("#qtd").value = '';
   }
 
   return (
