@@ -40,6 +40,13 @@ function App() {
     novaLista[key].qtd--;
     if (novaLista[key].qtd < 0)
       novaLista[key].qtd = 0;
+
+    if (novaLista[key].qtd === 0) {
+      if (window.confirm("Deseja remover o produto?")) {
+        novaLista.pop(novaLista[key])
+      }
+    }
+
     setListaCompras(novaLista);
   }
 
@@ -49,6 +56,7 @@ function App() {
     novaLista[key].valor = valor; // Atualiza o valor do item correto na lista
     setListaCompras(novaLista);
   }
+
 
   // Submit
   const handleSubmit = (e) => {
@@ -79,8 +87,8 @@ function App() {
             </div>
           </div>
           <div className="row mt-4">
-            <div className="col-md-6  text-center">
-              <div className="card">
+            <div className="col-md-6 text-center">
+              <div className="card mb-5">
                 <div className="card-body">
                   {
                     listaCompras.map((item, key) => {
@@ -108,11 +116,11 @@ function App() {
                   <form onSubmit={(e) => { handleSubmit(e) }}>
                     <div className="mb-3">
                       <label className="form-label">Nome</label>
-                      <input type="text" className="form-control" id="nome" onChange={(e) => { setNome(e.target.value) }} />
+                      <input type="text" className="form-control" id="nome" onChange={(e) => { setNome(e.target.value) }} autoComplete="off" />
                     </div>
                     <div className="mb-3">
                       <label className="form-label">Quantidade</label>
-                      <input type="number" className="form-control" id="qtd" onChange={(e) => { setQtd(e.target.value) }} />
+                      <input type="number" className="form-control" id="qtd" onChange={(e) => { setQtd(e.target.value) }} autoComplete="off" />
                     </div>
                     <div className="mb-3">
                       <input type="hidden" className="form-control" id="valor" onChange={(e) => { setValor(e.target.value) }} />
