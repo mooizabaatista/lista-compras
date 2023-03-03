@@ -110,12 +110,17 @@ function App() {
                   {
                     listaCompras.map((item, key) => {
                       return (
-                        <p key={item.id} className="item-lista">
-
+                        <p key={key} className="item-lista">
                           <span className="fs-5 nome-item">{item.nome}</span>
                           <i className="fal fa-minus ms-3 bg-primary p-1 rounded text-light" onClick={(e) => handleDiminuiQtd(key)}></i> <span class="badge bg-secondary">{item.qtd < 10 ? `0${item.qtd}` : item.qtd}</span> <i className="fal fa-plus me-3 bg-primary p-1 rounded text-light" onClick={(e) => { handleAumentaQtd(key) }}></i>
                           <span className="fs-5">
-                            <input value={valor || item.valor} type="text" className="form-control text-center valor" placeholder="Valor" onChange={(e) => { setValor(e.target.value) }} onBlur={(e) => { handleEditaValor(key, e.target.value) }} />
+                            <input
+                              defaultValue={listaCompras[key].valor}
+                              type="text"
+                              className="form-control text-center valor"
+                              placeholder="Valor"
+                              onBlur={(e) => { handleEditaValor(key, e.target.value) }}
+                            />
                           </span>
                           <hr />
                         </p>
