@@ -61,6 +61,9 @@ function App() {
 
     const novaLista = [...listaCompras, novoItem];
     setListaCompras(novaLista);
+
+    document.querySelector("#nome").value = '';
+    document.querySelector("#qtd").value = 0;
   }
 
   return (
