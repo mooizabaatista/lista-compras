@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 
 function App() {
-
   // Lista de Compras
   const [listaCompras, setListaCompras] = useState([]);
 
@@ -26,7 +25,6 @@ function App() {
   useEffect(() => {
     let valorTotal = 0
     listaCompras.map((item) => {
-      console.log(item);
       valorTotal += item.qtd * item.valor;
     });
     setTotal(valorTotal);
@@ -68,18 +66,31 @@ function App() {
     setListaCompras(novaLista);
   }
 
-  const generateId = () => {
-    return '_' + Math.random().toString(16).substr(2, 8);
-  };
+  // Risca o item selecionado
+  const handleRiscaElemento = (key) => {
+    const novaLista = [...listaCompras];
+    const item = novaLista[key];
+
+    if (item.concluido === false) {
+      item.concluido = true;
+      item.classe = "item-lista-riscado"
+    }
+    else {
+      item.concluido = false;
+      item.classe = "item-lista"
+    }
+
+    setListaCompras(novaLista);
+  }
 
   // Submit
   const handleSubmit = (e) => {
     e.preventDefault();
     const novoItem = {
-      id: generateId(),
       nome: nome,
       qtd: qtd,
-      valor: valor
+      valor: valor,
+      concluido: false
     }
 
     const novaLista = [...listaCompras, novoItem];
@@ -110,9 +121,9 @@ function App() {
                   {
                     listaCompras.map((item, key) => {
                       return (
-                        <p key={key} className="item-lista">
-                          <span className="fs-5 nome-item">{item.nome}</span>
-                          <i className="fal fa-minus ms-3 bg-primary p-1 rounded text-light" onClick={(e) => handleDiminuiQtd(key)}></i>&nbsp; <span class="badge bg-secondary">{item.qtd < 10 ? `0${item.qtd}` : item.qtd}</span> &nbsp;<i className="fal fa-plus me-3 bg-primary p-1 rounded text-light" onClick={(e) => { handleAumentaQtd(key) }}></i>
+                        <p key={key} className="item-lista" onClick={(e) => { handleRiscaElemento(key) }}>
+                          <span className={item.classe}>{item.nome}</span>
+                          <i className="fal fa-minus ms-3 bg-primary p-1 rounded text-light" onClick={(e) => handleDiminuiQtd(key)}></i> &nbsp; <span class="badge bg-secondary">{item.qtd < 10 ? `0${item.qtd}` : item.qtd}</span> &nbsp;<i className="fal fa-plus me-3 bg-primary p-1 rounded text-light" onClick={(e) => { handleAumentaQtd(key) }}></i>
                           <span className="fs-5">
                             <input
                               defaultValue={listaCompras[key].valor === 0 ? "" : listaCompras[key].valor}
