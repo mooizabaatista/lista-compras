@@ -75,7 +75,7 @@ function App() {
         <div className="container">
           <div className="row">
             <div className="col-12 my-3">
-              <h3 className="card-title mb-4 text-dark"><span className="badge bg-success total">Total: R$ {total.toFixed(2)}</span></h3>
+              <h3 className="card-title mb-4 text-dark"><span className="badge bg-success total">R$: {total.toFixed(2)}</span></h3>
             </div>
           </div>
           <div className="row mt-4">
