@@ -27,7 +27,7 @@ function App() {
     listaCompras.map((item) => {
       valorTotal += item.qtd * item.valor;
     });
-    setTotal(valorTotal);
+    setTotal(parseFloat(valorTotal));
 
     if (listaCompras.length > 0)
       localStorage.setItem("@lista", JSON.stringify(listaCompras))
