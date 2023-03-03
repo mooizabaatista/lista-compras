@@ -115,7 +115,7 @@ function App() {
                           <i className="fal fa-minus ms-3 bg-primary p-1 rounded text-light" onClick={(e) => handleDiminuiQtd(key)}></i>&nbsp; <span class="badge bg-secondary">{item.qtd < 10 ? `0${item.qtd}` : item.qtd}</span> &nbsp;<i className="fal fa-plus me-3 bg-primary p-1 rounded text-light" onClick={(e) => { handleAumentaQtd(key) }}></i>
                           <span className="fs-5">
                             <input
-                              defaultValue={listaCompras[key].valor}
+                              defaultValue={listaCompras[key].valor === 0 ? "" : listaCompras[key].valor}
                               type="text"
                               className="form-control text-center valor"
                               placeholder="Valor"
