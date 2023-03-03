@@ -14,7 +14,7 @@ function App() {
 
   // Adicionar item
   const [nome, setNome] = useState('');
-  const [qtd, setQtd] = useState(0);
+  const [qtd, setQtd] = useState('');
   const [valor, setValor] = useState(0.0);
 
   useEffect(() => {
