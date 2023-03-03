@@ -130,7 +130,7 @@ function App() {
                               type="text"
                               className="form-control text-center valor"
                               placeholder="Valor"
-                              onBlur={(e) => { handleEditaValor(key, e.target.value) }}
+                              onBlur={(e) => { handleEditaValor(key, parseFloat(e.target.value)) }}
                             />
                           </span>
                           <hr />
