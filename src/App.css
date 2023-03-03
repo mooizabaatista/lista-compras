@@ -13,6 +13,8 @@ i:hover {
     user-select: none;
 }
 
+
+
 .badge{
     font-size: 15px;
 }
@@ -39,8 +41,11 @@ i:hover {
 .valor {
     border: none;
     border-bottom: solid thin #999;
-    font-size: 18px;
 }
+
+.valor-total {
+        font-size:25px;
+    }
 
 .valor:focus {
     outline: none;
@@ -56,4 +61,59 @@ i:hover {
 
 p:hover {
     cursor: pointer;
+}
+
+
+
+@media (max-width: 767px) {
+    .valor-total {
+        font-size:25px;
+    }
+
+    .form-cadastro {
+        position: fixed;
+        z-index: 1030;
+        right: 0;
+        left: 0;   
+        border-radius: 0;
+        top: 1;
+        border-width: 0 0 1px;
+        line-height: 0;        
+        display:block;
+    }
+    
+    .item-lista{
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    i {
+        font-size: 25px;
+    }
+
+    .badge {
+        font-size: 18px;
+    }
+
+    .nome-item-lista-fix {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 25px;
+    }
+
+    .lista-de-compras {
+        overflow: scroll;
+        max-height:250px;
+        margin-top: -40px;
+    }
+
+    .item-lista-riscado {
+        color: red;
+    }
+
+   input.valor {
+    margin-top: 15px;
+    font-size: 20px;
+   }
 }

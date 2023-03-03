@@ -61,8 +61,10 @@ function App() {
 
   // Editar valor do produto
   const handleEditaValor = (key, valor) => {
-    const novaLista = [...listaCompras]; // Cria uma cópia da lista
-    novaLista[key].valor = valor; // Atualiza o valor do item correto na lista
+    const novaLista = [...listaCompras];
+    if (isNaN(valor))
+      valor = 0;
+    novaLista[key].valor = valor;
     setListaCompras(novaLista);
   }
 
@@ -106,24 +108,26 @@ function App() {
     <>
       <div>
         <header className="header text-light">
-          <h1 className="fs-3 mx-3 my-2"><i className="fal fa-shopping-cart "></i> Lista de Compras </h1>
+          <h1 className="mx-3 my-1 fs-5"><i className="fal fa-shopping-cart "></i> Lista de Compras </h1>
         </header>
         <div className="container">
           <div className="row">
             <div className="col-12 my-3">
-              <h3 className="card-title mb-4 text-dark"><span className="badge bg-success total">R$: {parseFloat(total.toFixed(2))}</span></h3>
+              <h3 className="card-title mb-4 text-dark"><span className="badge bg-success valor-total">R$: {parseFloat(total.toFixed(2))}</span></h3>
             </div>
           </div>
           <div className="row mt-4">
             <div className="col-md-6 text-center">
-              <div className="card mb-5">
-                <div className="card-body">
+              <div className="card mb-5 lista-de-compras">
+                <div className="card-body ">
                   {
                     listaCompras.map((item, key) => {
                       return (
                         <p key={key} className="item-lista" >
-                          <span className={item.classe} onClick={(e) => { handleRiscaElemento(key) }}>{item.nome} </span>
-                          <i className="fal fa-minus ms-3 bg-primary p-1 rounded text-light" onClick={(e) => handleDiminuiQtd(key)}></i> &nbsp; <span class="badge bg-secondary">{item.qtd < 10 ? `0${item.qtd}` : item.qtd}</span> &nbsp;<i className="fal fa-plus me-3 bg-primary p-1 rounded text-light" onClick={(e) => { handleAumentaQtd(key) }}></i>
+                          <span className={item.classe + ' nome-item-lista-fix'} onClick={(e) => { handleRiscaElemento(key) }}>{item.nome} </span>
+                          <div className="quantidade-item-lista">
+                            <i className="fal fa-minus ms-3 bg-primary p-1 rounded text-light" onClick={(e) => handleDiminuiQtd(key)}></i> &nbsp; <span class="badge bg-secondary">{item.qtd < 10 ? `0${item.qtd}` : item.qtd}</span> &nbsp;<i className="fal fa-plus me-3 bg-primary p-1 rounded text-light" onClick={(e) => { handleAumentaQtd(key) }}></i>
+                          </div>
                           <span className="fs-5">
                             <input
                               defaultValue={listaCompras[key].valor === 0 ? "" : listaCompras[key].valor}
@@ -144,8 +148,7 @@ function App() {
             </div>
             <div className="col-md-6">
               <div className="card">
-                <div className="card-body">
-
+                <div className="card-body form-cadastro">
                   <form onSubmit={(e) => { handleSubmit(e) }}>
                     <div className="mb-3">
                       <label className="form-label">Nome</label>
