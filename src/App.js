@@ -121,8 +121,8 @@ function App() {
                   {
                     listaCompras.map((item, key) => {
                       return (
-                        <p key={key} className="item-lista" onClick={(e) => { handleRiscaElemento(key) }}>
-                          <span className={item.classe}>{item.nome}</span>
+                        <p key={key} className="item-lista" >
+                          <span className={item.classe} onClick={(e) => { handleRiscaElemento(key) }}>{item.nome} </span>
                           <i className="fal fa-minus ms-3 bg-primary p-1 rounded text-light" onClick={(e) => handleDiminuiQtd(key)}></i> &nbsp; <span class="badge bg-secondary">{item.qtd < 10 ? `0${item.qtd}` : item.qtd}</span> &nbsp;<i className="fal fa-plus me-3 bg-primary p-1 rounded text-light" onClick={(e) => { handleAumentaQtd(key) }}></i>
                           <span className="fs-5">
                             <input
