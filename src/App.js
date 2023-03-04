@@ -167,8 +167,10 @@ function App() {
               <input type="text" placeholder="Digite o nome do item..." className="form-control" id="nome" onChange={(e) => { setNome(e.target.value) }} autoComplete="off" />
               <input type="number" placeholder="Digite a quantidade..." className="form-control" id="qtd" onChange={(e) => { setQtd(e.target.value) }} autoComplete="off" />
               <input type="hidden" className="form-control" id="valor" value={valor} onChange={(e) => { setValor(e.target.value) }} />
-              <button type="submit" className="btn btn-success  btn-sm">Adicionar <i class="fa fa-plus"></i></button>
-              <button type="submit" className="btn btn-danger ms-3 btn-sm" onClick={(e) => { handleLimpaLista(e) }}><span>Limpar Lista</span> <i class="fal fa-times"></i></button>
+              <div className="buttons-acoes-header">
+                <button type="submit" className="btn btn-success  btn-sm btn-add">Adicionar <i class="fa fa-plus ms-2"></i></button>
+                <button type="submit" className="btn btn-danger ms-3 btn-sm btn-limpar-lista" onClick={(e) => { handleLimpaLista(e) }}><span>Limpar Lista</span> <i class="fal fa-times ms-2"></i></button>
+              </div>
             </form>
           </div>
         </div>

@@ -104,3 +104,32 @@ body{
 .item-qtd {
     user-select: none;
 }
+
+.buttons-acoes-header {
+    display: flex!important;
+    flex-direction: row;
+    align-items: center;
+    
+}
+
+.btn-add {
+    display: flex!important;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.btn-add i {
+    font-size: 15px!important;
+}
+
+
+
+.btn-limpar-lista{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.btn-limpar-lista i {
+    font-size: 15px!important;
+}
