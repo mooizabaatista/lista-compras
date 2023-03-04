@@ -99,7 +99,7 @@ function App() {
     e.preventDefault();
 
     if (nome === "" || qtd === "" || qtd === "0") {
-      alert("Preencha os campos corretamente!")
+      alert("Preencha os campos corretamente!!!")
       return;
     }
 
