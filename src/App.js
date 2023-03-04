@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-// import app css
+
 import './App.css';
 
 function App() {
@@ -53,9 +53,10 @@ function App() {
     if (novaLista[key].qtd === 0) {
       if (window.confirm("Deseja remover o produto?")) {
         novaLista.pop(novaLista[key])
+      } else {
+        novaLista[key].qtd = 1;
       }
     }
-
     setListaCompras(novaLista);
   }
 
@@ -66,13 +67,14 @@ function App() {
       valor = 0;
     novaLista[key].valor = valor;
     setListaCompras(novaLista);
+    const valorTotal = novaLista[key].qtd * novaLista[key].valor
+    setValor(valorTotal);
   }
 
   // Risca o item selecionado
   const handleRiscaElemento = (key) => {
     const novaLista = [...listaCompras];
     const item = novaLista[key];
-
     if (item.concluido === false) {
       item.concluido = true;
       item.classe = "item-lista-riscado"
@@ -81,13 +83,25 @@ function App() {
       item.concluido = false;
       item.classe = "item-lista"
     }
-
     setListaCompras(novaLista);
   }
+
+  const handleDoubleClick = (e, key) => {
+    const novaLista = [...listaCompras];
+    novaLista[key].qtd = 1;
+    setListaCompras(novaLista);
+  }
+
 
   // Submit
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (nome === "" || qtd === "" || qtd === "0") {
+      alert("Preencha os campos corretamente!")
+      return;
+    }
+
     const novoItem = {
       nome: nome,
       qtd: qtd,
@@ -95,79 +109,109 @@ function App() {
       concluido: false
     }
 
+
+
+
     const novaLista = [...listaCompras, novoItem];
     setListaCompras(novaLista);
 
+    setNome("");
+    setQtd("");
+
     document.querySelector("#nome").value = '';
     document.querySelector("#qtd").value = '';
-
     document.querySelector("#nome").focus();
+  }
+
+  // Remove
+  const handleRemove = (key) => {
+    const novaLista = [...listaCompras];
+    if (window.confirm("Deseja remover o produto?")) {
+      novaLista.pop(novaLista[key])
+    }
+    setListaCompras(novaLista);
   }
 
   return (
     <>
-      <div>
-        <header className="header text-light">
-          <h1 className="mx-3 my-1 fs-5"><i className="fal fa-shopping-cart "></i> Lista de Compras </h1>
-        </header>
-        <div className="container">
-          <div className="row">
-            <div className="col-12 my-3">
-              <h3 className="card-title mb-4 text-dark"><span className="badge bg-success valor-total">R$: {parseFloat(total.toFixed(2))}</span></h3>
+      <div className="container-fluid">
+
+        <div className="fixed-items-top">
+          <div className="bg-dark">
+            <div className="row">
+              <div className="col-12">
+                <header className="header text-light bg-dark py-2">
+                  <h1 className="mx-3 my-1 fs-5"><i className="fal fa-shopping-cart fs-5 me-3 "></i> Lista de Compras </h1>
+                </header>
+              </div>
+            </div>
+
+
+            <div className="row my-2">
+              <div className="col-12">
+                <div className="total text-light py-2 text-center bg-success">
+                  <h1 className="mx-3 my-1 fs-1">R$ {total.toFixed(2)}</h1>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="row mt-4">
-            <div className="col-md-6 text-center">
-              <div className="card mb-5 lista-de-compras">
-                <div className="card-body ">
-                  {
-                    listaCompras.map((item, key) => {
-                      return (
-                        <p key={key} className="item-lista" >
-                          <span className={item.classe + ' nome-item-lista-fix'} onClick={(e) => { handleRiscaElemento(key) }}>{item.nome} </span>
-                          <div className="quantidade-item-lista">
-                            <i className="fal fa-minus ms-3 bg-primary p-1 rounded text-light" onClick={(e) => handleDiminuiQtd(key)}></i> &nbsp; <span class="badge bg-secondary">{item.qtd < 10 ? `0${item.qtd}` : item.qtd}</span> &nbsp;<i className="fal fa-plus me-3 bg-primary p-1 rounded text-light" onClick={(e) => { handleAumentaQtd(key) }}></i>
-                          </div>
-                          <span className="fs-5">
-                            <input
-                              defaultValue={listaCompras[key].valor === 0 ? "" : listaCompras[key].valor}
-                              type="text"
-                              className="form-control text-center valor"
-                              placeholder="Valor"
-                              onBlur={(e) => { handleEditaValor(key, parseFloat(e.target.value)) }}
-                            />
-                          </span>
-                          <hr />
-                        </p>
 
-                      )
-                    })
-                  }
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="card">
-                <div className="card-body form-cadastro">
-                  <form onSubmit={(e) => { handleSubmit(e) }}>
-                    <div className="mb-3">
-                      <label className="form-label">Nome</label>
-                      <input type="text" className="form-control" id="nome" onChange={(e) => { setNome(e.target.value) }} autoComplete="off" />
-                    </div>
-                    <div className="mb-3">
-                      <label className="form-label">Quantidade</label>
-                      <input type="number" className="form-control" id="qtd" onChange={(e) => { setQtd(e.target.value) }} autoComplete="off" />
-                    </div>
-                    <div className="mb-3">
-                      <input type="hidden" className="form-control" id="valor" value={valor} onChange={(e) => { setValor(e.target.value) }} />
-                    </div>
-                    <button type="submit" className="btn btn-primary">Adicionar</button>
-                  </form>
-                </div>
-              </div>
+          <div className="row mb-3">
+            <div className="col-md-12 col-xs-12 text-light ">
+              <form className="form-items" onSubmit={(e) => { handleSubmit(e) }}>
+                <input type="text" placeholder="Digite o nome do item..." className="form-control" id="nome" onChange={(e) => { setNome(e.target.value) }} autoComplete="off" />
+                <input type="number" placeholder="Digite a quantidade..." className="form-control" id="qtd" onChange={(e) => { setQtd(e.target.value) }} autoComplete="off" />
+                <input type="hidden" className="form-control" id="valor" value={valor} onChange={(e) => { setValor(e.target.value) }} />
+                <button type="submit" className="btn btn-light ">Adicionar</button>
+              </form>
             </div>
           </div>
         </div>
+
+
+
+        <div className="table-responsive table-items">
+          <table className="table text-center">
+            <thead className="bg-dark text-light">
+              <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                listaCompras.map((item, key) => {
+                  return (
+                    <>
+                      <tr>
+                        <td className="nome-item">{item.nome}</td>
+                        <td className="d-flex justify-content-center align-items-center item-qtd">
+                          <i className="fal fa-minus  bg-primary p-2 rounded text-light" onClick={(e) => handleDiminuiQtd(key)}></i> &nbsp;
+                          <div>
+                            <span className="badge bg-secondary fs-5" onClick={(e) => { handleDoubleClick(e, key) }}>{item.qtd}</span>
+                          </div>
+                          &nbsp;<i className="fal fa-plus bg-primary p-2 rounded text-light" onClick={(e) => { handleAumentaQtd(key) }}></i>
+                          &nbsp;<i class="fa fa-trash p-2 rounded bg-danger text-light" onClick={(e) => { handleRemove(key) }}></i>
+                        </td>
+                        <td>
+                          <input
+                            defaultValue={listaCompras[key].valor === 0 ? "" : listaCompras[key].valor}
+                            type="text"
+                            className="form-control text-center valor"
+                            placeholder="Valor..."
+                            onBlur={(e) => { handleEditaValor(key, parseFloat(e.target.value)) }}
+                          />
+                        </td>
+                      </tr>
+                    </>
+                  )
+                })
+              }
+            </tbody>
+          </table>
+        </div>
+
       </div>
     </>
   );

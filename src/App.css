@@ -1,119 +1,73 @@
-
-.header {
-    display: flex;
-    width: 100%;
-    background-color: #000;
+#root {
+  padding-top: 100px; /* ajuste o valor conforme necessário */
 }
 
-i:hover {
-    cursor: pointer;
+.fixed-items-top {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  background-color: rgb(0, 0, 0);
 }
 
-.card-body {
-    user-select: none;
+.table-items {
+  padding-top: 250px; /* ajuste o valor para corresponder à altura do elemento fixo */
+  z-index: 1;
 }
 
-
-
-.badge{
-    font-size: 15px;
+.form-items {
+    width: 80%;
+    margin: 0 auto;
 }
 
-.total {
-    font-size: 32px;
-}
-
-.item-lista {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.item-lista-riscado {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    text-decoration: line-through;
-    text-decoration-thickness: 3px;
-    text-decoration-color: red;
+.form-items input {
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
 .valor {
-    border: none;
-    border-bottom: solid thin #999;
+    width: 80%;
+    font-weight: bold;
 }
 
-.valor-total {
-        font-size:25px;
-    }
-
-.valor:focus {
-    outline: none;
-    box-shadow: none;
+.nome-item {
+    font-weight: bold;
 }
 
-.nome-item{
-    width: 100px;
-    font-size: 15px!important;
-    min-width: 70px;
-    max-width: 70px;
-}
-
-p:hover {
-    cursor: pointer;
-}
-
-
-
+/* Responsive Smartphones */
 @media (max-width: 767px) {
-    .valor-total {
-        font-size:25px;
+   .table { 
+        width: 100%!important;
+    }
+    .nome-item {
+        font-weight: bold;
+        font-size: 0.9em;
     }
 
-    .form-cadastro {
-        position: fixed;
-        z-index: 1030;
-        right: 0;
-        left: 0;   
-        border-radius: 0;
-        top: 1;
-        border-width: 0 0 1px;
-        line-height: 0;        
-        display:block;
-    }
-    
-    .item-lista{
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-    }
-
-    i {
-        font-size: 25px;
+    .table-items {
+         padding-top: 200px; /* ajuste o valor para corresponder à altura do elemento fixo */
+         z-index: 1;
     }
 
     .badge {
-        font-size: 18px;
+        font-size: 15px!important;
     }
 
-    .nome-item-lista-fix {
-        margin-top: 20px;
-        margin-bottom: 10px;
-        font-size: 25px;
+    i {
+        font-size: 11px!important;
+        font-weight: bold!important;
     }
 
-    .lista-de-compras {
-        overflow: scroll;
-        max-height:250px;
-        margin-top: -40px;
+    .valor {
+        font-size: 0.9em;
     }
+}
 
-    .item-lista-riscado {
-        color: red;
-    }
+.table {
+    width: 70%;
+    margin: 0 auto;
+}
 
-   input.valor {
-    margin-top: 15px;
-    font-size: 20px;
-   }
+.item-qtd {
+    user-select: none;
 }
