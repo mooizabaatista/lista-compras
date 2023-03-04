@@ -180,7 +180,7 @@ function App() {
                 return (
                   <>
                     <tr>
-                      <td className="nome-item p-2">{item.nome}</td>
+                      <td className={item.classe} onClick={(e) => { handleRiscaElemento(key) }}>{item.nome}</td>
                       <td className="d-flex justify-content-center align-items-center item-qtd ">
                         <i className="fal fa-minus  bg-primary p-2 rounded text-light" onClick={(e) => handleDiminuiQtd(key)}></i> &nbsp;
                         <div>

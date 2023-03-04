@@ -3,6 +3,18 @@ body{
     padding: 0!important;
 }
 
+.item-lista-riscado {
+    text-decoration: line-through;
+    color: red;
+    font-weight: bold;
+}
+
+.item-lista{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
 #root {
   padding-top: 100px; /* ajuste o valor conforme necessário */
 }
