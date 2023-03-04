@@ -65,6 +65,9 @@ body{
 
     .valor {
         font-size: 0.9em;
+        border: none;
+        border-bottom: solid thin #000;
+        margin-top: -8px;
     }
 
     .total {
