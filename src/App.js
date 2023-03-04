@@ -131,6 +131,14 @@ function App() {
     setListaCompras(novaLista);
   }
 
+  // Limpa a lista
+  const handleLimpaLista = (e) => {
+    e.preventDefault();
+    if (window.confirm("Deseja limpar a lista?")) {
+      setListaCompras([]);
+    }
+  }
+
   return (
     <>
       <div className="fixed-items-top">
@@ -159,7 +167,8 @@ function App() {
               <input type="text" placeholder="Digite o nome do item..." className="form-control" id="nome" onChange={(e) => { setNome(e.target.value) }} autoComplete="off" />
               <input type="number" placeholder="Digite a quantidade..." className="form-control" id="qtd" onChange={(e) => { setQtd(e.target.value) }} autoComplete="off" />
               <input type="hidden" className="form-control" id="valor" value={valor} onChange={(e) => { setValor(e.target.value) }} />
-              <button type="submit" className="btn btn-light ">Adicionar</button>
+              <button type="submit" className="btn btn-success  btn-sm">Adicionar <i class="fa fa-plus"></i></button>
+              <button type="submit" className="btn btn-danger ms-3 btn-sm" onClick={(e) => { handleLimpaLista(e) }}><span>Limpar Lista</span> <i class="fal fa-times"></i></button>
             </form>
           </div>
         </div>
