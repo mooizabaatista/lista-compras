@@ -43,14 +43,14 @@ body{
 
 /* Responsive Smartphones */
 @media (max-width: 767px) {
-   
+
     .nome-item {
         font-weight: bold;
         font-size: 0.9em;
     }
 
     .table-items {
-         padding-top: 200px; /* ajuste o valor para corresponder à altura do elemento fixo */
+         padding-top: 190px; /* ajuste o valor para corresponder à altura do elemento fixo */
          z-index: 1;
     }
 
@@ -59,12 +59,20 @@ body{
     }
 
     i {
-        font-size: 11px!important;
+        font-size: 10px!important;
         font-weight: bold!important;
     }
 
     .valor {
         font-size: 0.9em;
+    }
+
+    .total {
+        font-size: 1.35em!important;
+    }
+
+    td {
+        border: none!important;
     }
 }
 

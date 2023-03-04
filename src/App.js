@@ -138,8 +138,8 @@ function App() {
         <div className="bg-dark">
           <div className="row">
             <div className="col-12">
-              <header className="header text-light bg-dark py-2">
-                <h1 className="mx-3 my-1 fs-5"><i className="fal fa-shopping-cart fs-5 me-3 "></i> Lista de Compras </h1>
+              <header className="header text-light bg-dark pt-2 d-flex justify-content-between align-items-center">
+                <i className="fal fa-shopping-cart fs-5 me-3 ms-3"></i> <h1 className="mx-3 my-1 fs-5"> Lista de Compras </h1>
               </header>
             </div>
           </div>
@@ -148,7 +148,7 @@ function App() {
           <div className="row my-2">
             <div className="col-12">
               <div className="total text-light py-2 text-center bg-success">
-                <h1 className="mx-3 my-1 fs-1">R$ {total.toFixed(2)}</h1>
+                <h1 className="mx-3 my-1 fs-1 total">R$ {total.toFixed(2)}</h1>
               </div>
             </div>
           </div>
@@ -181,8 +181,8 @@ function App() {
                 return (
                   <>
                     <tr>
-                      <td className="nome-item">{item.nome}</td>
-                      <td className="d-flex justify-content-center align-items-center item-qtd">
+                      <td className="nome-item p-2">{item.nome}</td>
+                      <td className="d-flex justify-content-center align-items-center item-qtd ">
                         <i className="fal fa-minus  bg-primary p-2 rounded text-light" onClick={(e) => handleDiminuiQtd(key)}></i> &nbsp;
                         <div>
                           <span className="badge bg-secondary fs-5" onClick={(e) => { handleDoubleClick(e, key) }}>{item.qtd}</span>
