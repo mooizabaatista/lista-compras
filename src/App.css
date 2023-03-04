@@ -1,3 +1,8 @@
+body{
+    margin: 0!important;
+    padding: 0!important;
+}
+
 #root {
   padding-top: 100px; /* ajuste o valor conforme necessário */
 }
@@ -5,6 +10,8 @@
 .fixed-items-top {
   position: fixed;
   top: 0;
+  left: auto;
+  right: auto;
   width: 100%;
   z-index: 2;
   background-color: rgb(0, 0, 0);
@@ -36,9 +43,7 @@
 
 /* Responsive Smartphones */
 @media (max-width: 767px) {
-   .table { 
-        width: 100%!important;
-    }
+   
     .nome-item {
         font-weight: bold;
         font-size: 0.9em;
@@ -64,7 +69,7 @@
 }
 
 .table {
-    width: 70%;
+    width: 100%;
     margin: 0 auto;
 }
 
