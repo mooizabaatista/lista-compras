@@ -78,6 +78,10 @@ body{
     td {
         border: none!important;
     }
+
+    .item-qtd {
+        margin-left: 25px!important;
+    }
 }
 
 .table {
