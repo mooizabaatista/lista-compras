@@ -67,8 +67,9 @@ function App() {
       valor = 0;
     novaLista[key].valor = valor;
     setListaCompras(novaLista);
+
     const valorTotal = novaLista[key].qtd * novaLista[key].valor
-    setValor(valorTotal);
+    setTotal(valorTotal);
   }
 
   // Risca o item selecionado
@@ -109,14 +110,12 @@ function App() {
       concluido: false
     }
 
-
-
-
     const novaLista = [...listaCompras, novoItem];
     setListaCompras(novaLista);
 
     setNome("");
-    setQtd("");
+    setQtd(0);
+    setValor(0.0);
 
     document.querySelector("#nome").value = '';
     document.querySelector("#qtd").value = '';
